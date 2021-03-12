@@ -1,8 +1,9 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Card, CardContent, CardMedia } from '@material-ui/core';
 import CronologyAccordion from './components/CronologyAccordion';
 import FormComp from './components/FormComp';
 import HeaderBar from './components/HeaderBar';
 import MapComp from './components/MapComp';
+
 
 function App() {
   return (
@@ -15,13 +16,22 @@ function App() {
         </Grid>
 
         <Grid container item >
-          <Grid item >
+          <Grid item sx={9}>
             <FormComp />
           </Grid>
 
-          <Grid item >
-            <MapComp />
+          <Grid item sx={3}>
+            <Card>
+              <CardContent>
+                <MapComp />
+              </CardContent>
+            </Card>
+
+
+
           </Grid>
+
+         
 
         </Grid>
 
