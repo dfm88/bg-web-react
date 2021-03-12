@@ -1,5 +1,6 @@
 import { Grid, Card, CardContent, CardMedia } from '@material-ui/core';
 import CronologyAccordion from './components/CronologyAccordion';
+import FaunaForm from './components/FaunaForm';
 import FormComp from './components/FormComp';
 import HeaderBar from './components/HeaderBar';
 import MapComp from './components/MapComp';
@@ -9,8 +10,7 @@ function App() {
   return (
     <div className="App">
       <HeaderBar />
-      <Grid container direction='column' spacing={2} >
-
+      <Grid container direction='column' spacing={2} style={{padding: '2%'}}>
         <Grid item >
           <CronologyAccordion />
         </Grid>
@@ -27,9 +27,13 @@ function App() {
               </CardContent>
             </Card>
 
+          </Grid>    
+
+          <Grid item sx={12}>
+            <FaunaForm />
+          </Grid>  
 
 
-          </Grid>
 
          
 
