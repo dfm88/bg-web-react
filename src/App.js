@@ -15,21 +15,21 @@ function App() {
           <CronologyAccordion />
         </Grid>
 
-        <Grid container item >
-          <Grid item sx={9}>
+        <Grid container item direction="row" spacing={2} alignItems="stretch">
+          <Grid item sm={12} md={6}>
             <FormComp />
           </Grid>
 
-          <Grid item sx={3}>
+          <Grid item sm={12} md={6} >
             <Card>
-              <CardContent>
+              <CardContent fullwidth>
                 <MapComp />
               </CardContent>
             </Card>
 
           </Grid>    
 
-          <Grid item sx={12}>
+          <Grid item xs={12}>
             <FaunaForm />
           </Grid>  
 

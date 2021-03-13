@@ -1,34 +1,37 @@
 import React from 'react'
-import { AppBar , colors, Toolbar} from '@material-ui/core'
+import { AppBar, colors, Toolbar, Typography } from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles"
 import CronologyAccordion from './CronologyAccordion';
 
 const useStyles = makeStyles(theme => ({
     root: {
-      boxShadow: "none",
-      backgroundColor: "#0D1B2A",
-      color: "#E0E1DD",
-      fontSize: '250%'
-    } 
-  }));
+        boxShadow: "none",
+        backgroundColor: "#0D1B2A",
+        color: "#E0E1DD",
+        fontSize: '250%'
+    }
+}));
 
 function HeaderBar() {
-   
-    const classes = useStyles();   
+
+    const classes = useStyles();
 
 
     return (
-        <AppBar position ='static' >
+        <AppBar position='static' >
             <Toolbar className={classes.root}>
-                TITOLO
-                
+                <Typography variant='h3'>
+                    TITOLO
+                </Typography>
+
+
             </Toolbar>
-          
+
 
         </AppBar>
 
-            
-    
+
+
     )
 }
 
