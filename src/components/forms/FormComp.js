@@ -109,7 +109,7 @@ function FormComp() {
                             {/*SEGNALATORE*/}
                             <Grid container >
                                 <Grid item xs={12} lg={4}>
-                                    <Field style={{ width: '98%' }} defaultValue="" name="caller" as={TextField} type="text" multiple={false} select label="Segnalatore" variant="outlined" InputLabelProps={{
+                                    <Field style={{ width: '98%' }} defaultValue="Carabinieri" name="caller" as={TextField} type="text" multiple={false} select label="Segnalatore" variant="outlined" InputLabelProps={{
                                         shrink: true,
                                     }}>
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles"
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CronologyTable from './table/CronologyTable'
 
 const useStyles = makeStyles(theme => (
     {
@@ -27,14 +28,12 @@ function CronologyAccordion() {
     return (
         <Accordion className={classes.root}>
             <AccordionSummary expandIcon={<ExpandMoreIcon className={classes.root} />}>
-                <Typography variant='h5'>
+                <Typography variant='h5' style={{fontWeight: 'bold'}}>
                     Storico
                 </Typography>
             </AccordionSummary>
-            <AccordionDetails>
-                <Typography variant='h5'>
-                    aaa
-                </Typography>
+            <AccordionDetails style={{backgroundColor: "#8994ab"}}>
+                <CronologyTable/>
 
             </AccordionDetails>
         </Accordion>
