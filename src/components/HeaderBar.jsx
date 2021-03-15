@@ -1,7 +1,10 @@
 import React from 'react'
-import { AppBar, colors, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, colors, Toolbar, Typography, CardMedia } from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles"
 import CronologyAccordion from './CronologyAccordion';
+import logo from './NO BG logo.png'
+
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -15,13 +18,17 @@ const useStyles = makeStyles(theme => ({
 function HeaderBar() {
 
     const classes = useStyles();
-
+    console.log(logo)
 
     return (
+        
         <AppBar position='static' >
             <Toolbar className={classes.root}>
-                <Typography variant='h3'>
-                    TITOLO
+                <img src={logo} width="40" height="60" />
+
+                <Typography variant='h3' style={{fontWeight:'bold'}}>
+
+                &emsp; Provincia di BG
                 </Typography>
 
 

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Card, CardContent, TextField, Typography, MenuItem, Select, Grid, makeStyles, Divider } from '@material-ui/core'
-import { Form, Formik, Field, useField, FieldArray, } from 'formik'
+import { Form, Formik, ErrorMessage, Field, useField, FieldArray, } from 'formik'
 import { FormControlLabel } from '@material-ui/core';
 import { CardHeader } from '@material-ui/core';
+import * as Yup from 'yup';
 
 const today = new Date();
 console.log(today)
@@ -11,9 +12,7 @@ const initialValues = {
 
     date: today.toISOString().slice(0, 10),
     timeReceived: (new Date(today.getTime() - (today.getTimezoneOffset() * 60000)).toISOString().slice(11, 16)),
-    caller: ['Carabinieri', 'Vigili del Fuoco', 'Prefettura', 'Privato Cittadino',
-        'Regione Lombardia', 'Autorità Giudiziaria', 'Forestale', 'Polizia Locale', 'Polizia di Stato',
-        'Guardia di Finanza', 'ARPA', 'Ufficio Tecnico Comunale', 'ASL'],
+    caller: '',
     callerGenerics: '',
     callerPhone: '',
     city: '',
@@ -24,6 +23,18 @@ const initialValues = {
     worker: '',
 
 };
+
+const validationSchema = Yup.object(
+    {
+        caller: Yup.string("Campo obbligatorio!").required("Campo obbligatorio"),
+    }
+)
+
+const callerList =  ['Carabinieri', 'Vigili del Fuoco', 'Prefettura', 'Privato Cittadino',
+        'Regione Lombardia', 'Autorità Giudiziaria', 'Forestale', 'Polizia Locale', 'Polizia di Stato',
+        'Guardia di Finanza', 'ARPA', 'Ufficio Tecnico Comunale', 'ASL'];
+
+
 const MyTextField = ({ label, placeholder, ...props }) => {
     const [field, meta] = useField(props);
     const errorText = meta.error && meta.touched ? meta.error : ''
@@ -64,8 +75,9 @@ function FormComp() {
             <CardContent style={{ width: 'flex' }}>
                 <Formik
                     initialValues={initialValues}
-                    onSubmit={() => { }}>
-                    {({ values }) =>
+                    onSubmit={() => { }}
+                    validationSchema={validationSchema}>
+                    {({ values, errors }) =>
                     (<>
                         <Form className={classes.root}>
 
@@ -76,6 +88,8 @@ function FormComp() {
                                 display="block"
                                 variant="caption"
                             >
+
+                                
                                 DATA E ORA
                             </Typography>
 
@@ -109,11 +123,11 @@ function FormComp() {
                             {/*SEGNALATORE*/}
                             <Grid container >
                                 <Grid item xs={12} lg={4}>
-                                    <Field style={{ width: '98%' }} defaultValue="Carabinieri" name="caller" as={TextField} type="text" multiple={false} select label="Segnalatore" variant="outlined" InputLabelProps={{
-                                        shrink: true,
-                                    }}>
+                                    <Field  style={{ width: '98%' }} defaultValue="Carabinieri" name="caller" as={TextField} type="text" multiple={false} select label="Segnalatore" variant="outlined" InputLabelProps={{
+                                        shrink: values.caller.length !== 0,
+                                    } }>
 
-                                        {initialValues.caller.map((singleCaller, index) => {
+                                        {callerList.map((singleCaller, index) => {
                                             return (
 
                                                 <MenuItem key={index} value={singleCaller} placeholder>{singleCaller}
@@ -122,6 +136,8 @@ function FormComp() {
                                             )
                                         })}
                                     </Field>
+                                < ErrorMessage name='caller' component="div" style={{Text: 'red'}} />
+  
                                 </Grid>
                                 <Grid item xs={12} lg={4}>
                                     <Field style={{ width: '98%' }} name="callerGenerics" as={TextField} type="text" variant="outlined" label="Generalità" placeholder="Nome, Compagnia, ecc." />
@@ -173,6 +189,7 @@ function FormComp() {
                                 {/*NOTE*/}
                                 <Grid item xs={12}>
                                     <Field style={{ width: '99%' }} name="notes" as={TextField} multiline rows={3} rowsMax={5} variant="outlined" label="Note" />
+                                    
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Field style={{ width: '99%' }} name="worker" as={TextField} type="text" variant="outlined" label="Nome Operatore" placeholder="Nominativo" />
@@ -180,6 +197,7 @@ function FormComp() {
                             </Grid>
 
                             <pre>{JSON.stringify(values, null, 4)}</pre>
+                            <pre>{JSON.stringify(errors, null, 4)}</pre>
                         </Form>
                     </>
                     )}

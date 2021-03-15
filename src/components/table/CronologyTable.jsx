@@ -3,6 +3,10 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import GetAppIcon from '@material-ui/icons/GetApp';
 
 const useStyles = makeStyles((theme) => ({
+    table: {
+        minWidth: 650,
+        tableLayout: 'inherit'
+    },
     root: {
 
 
@@ -40,7 +44,7 @@ function CronologyTable() {
     const classes = useStyles();
     return (
         <TableContainer component={Paper} className={classes.root}>
-            <Table>
+            <Table className={classes.table}>
                 <TableHead>
                     <TableRow >
                         <TableCell>Dessert (100g serving)</TableCell>
