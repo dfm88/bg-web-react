@@ -1,7 +1,6 @@
 import React from 'react'
-import { AppBar, colors, Toolbar, Typography, CardMedia } from '@material-ui/core'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles"
-import CronologyAccordion from './CronologyAccordion';
 import logo from './NO BG logo.png'
 
 
@@ -18,7 +17,6 @@ const useStyles = makeStyles(theme => ({
 function HeaderBar() {
 
     const classes = useStyles();
-    console.log(logo)
 
     return (
 

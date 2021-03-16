@@ -3,13 +3,14 @@ import { Card, CardContent, Checkbox, Radio, Grid } from '@material-ui/core'
 import { Form, Formik, Field, useField } from 'formik'
 import { FormControlLabel } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
+import MySubmitButton from './FormsCompPersonalized/MySubmitButton';
 
 
 const initialValues = {
     tipoIntervento: '',
     specie: '',
     condizioni: ['Ferito', 'Vivo', 'Morto', 'Disorientato'],
-    
+
 
 };
 
@@ -39,6 +40,7 @@ function FaunaForm() {
                                 <Grid item md={4} xs={12} >
                                     <div>
                                         <MyRadio name="tipoIntervento" value='Fauna selvatica' type="radio" label="Fauna selvatica" />
+
                                     </div>
                                     <div>
                                         <MyRadio name="tipoIntervento" value='Emergenza ambientale' type="radio" label="Emergenza ambientale" />
@@ -47,12 +49,20 @@ function FaunaForm() {
                                 </Grid>
 
                                 <Grid item md={4} xs={12}>
-                                    <Field as={TextField}></Field>
+                                   
                                 </Grid>
 
                                 <Grid item md={4} xs={12}>
-                                    <Field as={TextField} select></Field>
+                                  
                                 </Grid>
+
+                                <Grid item md={4} xs={12}>
+                                    <MySubmitButton>
+                                        Invia
+                                    </MySubmitButton>
+                                </Grid>
+
+
 
                             </Grid>
 
@@ -61,6 +71,8 @@ function FaunaForm() {
                         </Form>
 
                     )}
+
+
 
                 </Formik>
             </CardContent>

@@ -2,7 +2,7 @@ import React from 'react'
 import { TextField } from '@material-ui/core';
 import { useField } from 'formik'
 
-function MyDateField({name, ...anyOtherProp}) {
+function MyDateTimeField({name, ...anyOtherProp}) {
 
     const [field, meta ] = useField(name);
 
@@ -28,4 +28,4 @@ function MyDateField({name, ...anyOtherProp}) {
     )
 }
 
-export default MyDateField
+export default MyDateTimeField

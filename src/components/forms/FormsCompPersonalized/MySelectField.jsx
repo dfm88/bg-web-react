@@ -10,7 +10,7 @@ function MySelectField({name, listToBeRendered, ...anyOtherProp}) {
 
     const handleChange = evt => {
         const { value } = evt.target;
-        setFieldValue(name, value);
+        setFieldValue(name, value); 
     }
 
     const configSelect={

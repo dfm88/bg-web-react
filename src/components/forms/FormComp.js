@@ -1,15 +1,13 @@
 import React from 'react'
-import { Card, CardContent, TextField, Typography, MenuItem, Select, Grid, makeStyles, Divider } from '@material-ui/core'
-import { Form, Formik, ErrorMessage, Field, useField, FieldArray, } from 'formik'
-import { FormControlLabel } from '@material-ui/core';
+import { Card, CardContent, TextField, Typography, Grid, makeStyles, Divider } from '@material-ui/core'
+import { Form, Formik, useField } from 'formik';
 import { CardHeader } from '@material-ui/core';
 import * as Yup from 'yup';
 import MyTextField from './FormsCompPersonalized/MyTextField'
 import MySelectField from './FormsCompPersonalized/MySelectField';
-import MyDateField from './FormsCompPersonalized/MyDateField';
+import MyDateTimeField from './FormsCompPersonalized/MyDateTimeField';
 
 const today = new Date();
-console.log(today)
 
 const INITIAL_VALUES = {
 
@@ -116,11 +114,11 @@ const aggiungta = props.selectedTab;
                             <Grid container spacing={2}>
                                 {/******DATA SEGNALAZIONE******/}
                                 <Grid item xs={6}>
-                                    <MyDateField style={{ width: '98%' }} type='date' name='date' label='Data Segnalazione'/>
+                                    <MyDateTimeField style={{ width: '98%' }} type='date' name='date' label='Data Segnalazione'/>
                                 </Grid>
                                 <Grid item xs={6}>
                                     {/******ORA SEGNALAZIONE******/}
-                                    <MyDateField style={{ width: '98%' }} name="timeReceived" type="time"  label="Ora segnalazione"/>
+                                    <MyDateTimeField style={{ width: '98%' }} name="timeReceived" type="time"  label="Ora segnalazione"/>
                                 </Grid>
 
                             </Grid>
