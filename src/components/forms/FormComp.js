@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 const today = new Date();
 console.log(today)
 
-const initialValues = {
+const INITIAL_VALUES = {
 
     date: today.toISOString().slice(0, 10),
     timeReceived: (new Date(today.getTime() - (today.getTimezoneOffset() * 60000)).toISOString().slice(11, 16)),
@@ -24,7 +24,7 @@ const initialValues = {
 
 };
 
-const validationSchema = Yup.object(
+const VALIDATION_SCHEMA = Yup.object().shape(
     {
         caller: Yup.string("Campo obbligatorio!").required("Campo obbligatorio"),
     }
@@ -74,9 +74,9 @@ function FormComp() {
             <CardHeader title='Dati Generali della segnalazione' style={{ backgroundColor: '#A9B7C7' }} />
             <CardContent style={{ width: 'flex' }}>
                 <Formik
-                    initialValues={initialValues}
-                    onSubmit={() => { }}
-                    validationSchema={validationSchema}>
+                    initialValues={{...INITIAL_VALUES}}
+                    onSubmit={values => { console.log(values) }}
+                    validationSchema={VALIDATION_SCHEMA}>
                     {({ values, errors }) =>
                     (<>
                         <Form className={classes.root}>
