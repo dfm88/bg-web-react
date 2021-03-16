@@ -6,11 +6,14 @@ import ViabilitaForm from './ViabilitaForm';
 import ProtCivileForm from './ProtCivileForm';
 
 
-function TabForms() {
+function TabForms(props) {
+
     const [selectedTab, setSelectedTab] = useState(0);
 
     const handleTabChange = (event, newValue) => {
         setSelectedTab(newValue);
+        
+        props.changeTabToApp(newValue);
     }
 
     return (

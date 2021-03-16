@@ -1,4 +1,5 @@
 import { Grid, Card, CardContent, CardHeader } from '@material-ui/core';
+import {React, useState } from 'react';
 import CronologyAccordion from './components/CronologyAccordion';
 import FaunaForm from './components/forms/FaunaForm';
 import FormComp from './components/forms/FormComp';
@@ -9,6 +10,15 @@ import MyMapComp from './components/maps/MyMapComp';
 
 
 function App() {
+
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const changheSelectedTab = (num) => {
+      setSelectedTab(num);
+      console.log('VALORE DELLA TAB IN APP', num)
+  }
+
+
   return (
     <div className="App">
       <HeaderBar />
@@ -19,7 +29,7 @@ function App() {
 
         <Grid container item direction="row" spacing={2} alignItems="stretch">
           <Grid item sm={12} md={6}>
-            <FormComp />
+            <FormComp  selectedTab={selectedTab}/>
           </Grid>
 
           <Grid item sm={12} md={6} >
@@ -38,7 +48,7 @@ function App() {
               <CardHeader title='Dati Specifici della segnalazione' style={{ backgroundColor: '#A9B7C7' }} />
               <CardContent >
 
-                <TabForms />
+                <TabForms changeTabToApp={changheSelectedTab}/>
 
               </CardContent>
             </Card>

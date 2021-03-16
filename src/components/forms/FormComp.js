@@ -4,6 +4,9 @@ import { Form, Formik, ErrorMessage, Field, useField, FieldArray, } from 'formik
 import { FormControlLabel } from '@material-ui/core';
 import { CardHeader } from '@material-ui/core';
 import * as Yup from 'yup';
+import MyTextField from './FormsCompPersonalized/MyTextField'
+import MySelectField from './FormsCompPersonalized/MySelectField';
+import MyDateField from './FormsCompPersonalized/MyDateField';
 
 const today = new Date();
 console.log(today)
@@ -24,10 +27,24 @@ const INITIAL_VALUES = {
 
 };
 
-const VALIDATION_SCHEMA = Yup.object().shape(
+const VALIDATION_SCHEMA = Yup.object(
     {
-        caller: Yup.string("Campo obbligatorio!").required("Campo obbligatorio"),
+        city: Yup.string().required('Campo Obbligatorio'),
+        callerPhone: Yup.number().integer().typeError('Numero non valido').required('Campo Obbligatorio'),
+        callerGenerics: Yup.string("formato non valido").required('Campo Obbligatorio'),
+        caller: Yup.string("formato non valido").required("Campo obbligatorio"),
+        street: Yup.string(),
+        address: Yup.string(),
+        otherAddress: Yup.string(),
+        worker: Yup.string().required('Campo obbligatorio'),
+        date: Yup.date("Formato data errato").required("Campo obbligatorio"),
+        timeReceived: Yup.string().required("Campo obbligatorio"),
+
     }
+)
+.test('at-least-one-property', "Almeno un campo fra Indirizzo, S.P., Altro è obbligatorio", value => 
+  !!(value.street || value.address || value.otherAddress)
+  
 )
 
 const callerList =  ['Carabinieri', 'Vigili del Fuoco', 'Prefettura', 'Privato Cittadino',
@@ -35,7 +52,7 @@ const callerList =  ['Carabinieri', 'Vigili del Fuoco', 'Prefettura', 'Privato C
         'Guardia di Finanza', 'ARPA', 'Ufficio Tecnico Comunale', 'ASL'];
 
 
-const MyTextField = ({ label, placeholder, ...props }) => {
+const MyTextFieldOld = ({ label, placeholder, ...props }) => {
     const [field, meta] = useField(props);
     const errorText = meta.error && meta.touched ? meta.error : ''
 
@@ -67,8 +84,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function FormComp() {
+function FormComp(props) {
     const classes = useStyles();
+
+const aggiungta = props.selectedTab;
+
+
     return (
         <Card style={{ backgroundColor: '#DAE0E7' }} raised>
             <CardHeader title='Dati Generali della segnalazione' style={{ backgroundColor: '#A9B7C7' }} />
@@ -87,25 +108,19 @@ function FormComp() {
                                 color="textSecondary"
                                 display="block"
                                 variant="caption"
-                            >
-
-                                
+                            >                
                                 DATA E ORA
                             </Typography>
 
 
-                            <Grid container >
-                                {/*DATA SEGNALAZIONE*/}
+                            <Grid container spacing={2}>
+                                {/******DATA SEGNALAZIONE******/}
                                 <Grid item xs={6}>
-                                    <Field style={{ width: '98%' }} name="date" type="date" as={TextField} label="Data segnalazione" InputLabelProps={{
-                                        shrink: true,
-                                    }} variant="outlined" />
+                                    <MyDateField style={{ width: '98%' }} type='date' name='date' label='Data Segnalazione'/>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    {/*ORA SEGNALAZIONE*/}
-                                    <Field style={{ width: '98%' }} name="timeReceived" type="time" as={TextField} label="Ora segnalazione" InputLabelProps={{
-                                        shrink: true,
-                                    }} variant="outlined" />
+                                    {/******ORA SEGNALAZIONE******/}
+                                    <MyDateField style={{ width: '98%' }} name="timeReceived" type="time"  label="Ora segnalazione"/>
                                 </Grid>
 
                             </Grid>
@@ -120,30 +135,18 @@ function FormComp() {
                                 INFO SEGNALATORE
                             </Typography>
 
-                            {/*SEGNALATORE*/}
+                            {/******SEGNALATORE******/}
                             <Grid container >
                                 <Grid item xs={12} lg={4}>
-                                    <Field  style={{ width: '98%' }} defaultValue="Carabinieri" name="caller" as={TextField} type="text" multiple={false} select label="Segnalatore" variant="outlined" InputLabelProps={{
-                                        shrink: values.caller.length !== 0,
-                                    } }>
-
-                                        {callerList.map((singleCaller, index) => {
-                                            return (
-
-                                                <MenuItem key={index} value={singleCaller} placeholder>{singleCaller}
-                                                </MenuItem>
-
-                                            )
-                                        })}
-                                    </Field>
-                                < ErrorMessage name='caller' component="div" style={{Text: 'red'}} />
-  
+                                    <MySelectField style={{ width: '98%' }} name='caller' listToBeRendered={callerList} label="Segnalatore"/>
                                 </Grid>
+                                {/******SEGNALATORE NOME******/}
                                 <Grid item xs={12} lg={4}>
-                                    <Field style={{ width: '98%' }} name="callerGenerics" as={TextField} type="text" variant="outlined" label="Generalità" placeholder="Nome, Compagnia, ecc." />
+                                    <MyTextField style={{ width: '98%' }} name="callerGenerics" type="text" label="Generalità" placeholder="Nome, Compagnia, ecc." />
                                 </Grid>
+                                {/******SEGNALATORE TELEFONO******/}
                                 <Grid item xs={12} lg={4}>
-                                    <Field style={{ width: '98%' }} name="callerPhone" as={TextField} type="tel" variant="outlined" label="Telefono" placeholder="Contatto segnalatore" />
+                                    <MyTextField style={{ width: '98%' }} name="callerPhone" type="tel" label="Telefono" placeholder="Contatto segnalatore" />
                                 </Grid>
 
                             </Grid>
@@ -160,17 +163,21 @@ function FormComp() {
 
                             <div >
                                 <Grid container >
+                                     {/******COMUNE******/}
                                     <Grid item xs={12} md={6} >
-                                        <Field style={{ width: '98%' }} name="city" as={TextField} type="address" variant="outlined" label="Comune" placeholder="Città, Comune" />
+                                        <MyTextField style={{ width: '98%' }} name="city" type="address" label="Comune" placeholder="Città, Comune" />
                                     </Grid>
+                                     {/******INDIRIZZO******/}
                                     <Grid item xs={12} md={6} >
-                                        <Field style={{ width: '98%' }} name="address" as={TextField} type="address" variant="outlined" label="Indirizzo" placeholder="Via, Piazza, Viale" />
+                                        <MyTextField style={{ width: '98%' }} name="address" type="address"  label="Indirizzo" placeholder="Via, Piazza, Viale" />
                                     </Grid>
+                                     {/******S.P.******/}
                                     <Grid item xs={12} md={6} >
-                                        <Field style={{ width: '98%' }} name="street" as={TextField} type="number" variant="outlined" label="Strada Provinciale (solo Nr.)" placeholder="Nr. strada provinciale" />
+                                        <MyTextField style={{ width: '98%' }} name="street" type="number"  label="Strada Provinciale (solo Nr.)" placeholder="Nr. strada provinciale" />
                                     </Grid>
+                                     {/******ALTRO...******/}
                                     <Grid item xs={12} md={6} >
-                                        <Field style={{ width: '98%' }} name="otherAddress" as={TextField} type="address" variant="outlined" label="Altro" placeholder="Dettagli luogo.." />
+                                        <MyTextField style={{ width: '98%' }} name="otherAddress" type="address" label="Altro" placeholder="Dettagli luogo.." />
                                     </Grid>
                                 </Grid>
                             </div>
@@ -186,15 +193,16 @@ function FormComp() {
                             </Typography>
 
                             <Grid container>
-                                {/*NOTE*/}
+                                {/******NOTE******/}
                                 <Grid item xs={12}>
-                                    <Field style={{ width: '99%' }} name="notes" as={TextField} multiline rows={3} rowsMax={5} variant="outlined" label="Note" />
-                                    
+                                    <MyTextField  style={{ width: '99%' }} name="notes" multiline rows={3} rowsMax={5} label="Note" />                                    
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Field style={{ width: '99%' }} name="worker" as={TextField} type="text" variant="outlined" label="Nome Operatore" placeholder="Nominativo" />
+                                    <MyTextField style={{ width: '99%' }} name="worker" type="text" label="Nome Operatore" placeholder="Nominativo" />
                                 </Grid>
                             </Grid>
+
+                        
 
                             <pre>{JSON.stringify(values, null, 4)}</pre>
                             <pre>{JSON.stringify(errors, null, 4)}</pre>

@@ -21,14 +21,14 @@ function HeaderBar() {
     console.log(logo)
 
     return (
-        
+
         <AppBar position='static' >
             <Toolbar className={classes.root}>
                 <img src={logo} width="40" height="60" />
 
-                <Typography variant='h3' style={{fontWeight:'bold'}}>
+                <Typography variant='h3' style={{ fontWeight: 'bold' }}>
 
-                &emsp; Provincia di BG
+                    &emsp; Provincia di BG
                 </Typography>
 
 
