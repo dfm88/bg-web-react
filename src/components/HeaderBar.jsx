@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Hidden } from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles"
 import logo from './NO BG logo.png'
 
@@ -24,10 +24,19 @@ function HeaderBar() {
             <Toolbar className={classes.root}>
                 <img src={logo} width="40" height="60" />
 
-                <Typography variant='h3' style={{ fontWeight: 'bold' }}>
+                <Hidden smDown>
+                    <Typography variant='h3' style={{ fontWeight: 'bold' }}>
+                        &emsp; Provincia di Bergamo
+                    </Typography>
+                </Hidden>
 
-                    &emsp; Provincia di BG
-                </Typography>
+                <Hidden mdUp xsDown>
+                    <Typography variant='h3' style={{ fontWeight: 'bold' }}>
+                        &emsp; Prov. di BG
+                    </Typography>
+                </Hidden>
+
+
 
 
             </Toolbar>

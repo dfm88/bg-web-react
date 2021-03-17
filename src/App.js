@@ -12,6 +12,7 @@ import MyMapComp from './components/maps/MyMapComp';
 function App() {
 
   const [selectedTab, setSelectedTab] = useState(0);
+  const [mainFormValidation, setMainFormValidation] = useState();
 
   const changheSelectedTab = (num) => {
       setSelectedTab(num);
@@ -19,17 +20,18 @@ function App() {
   }
 
 
+
   return (
     <div className="App">
       <HeaderBar />
       <Grid container direction='column' spacing={2} style={{ padding: '2%' }}>
-        <Grid item >
+        <Grid item xs={12}  >
           <CronologyAccordion />
         </Grid>
 
         <Grid container item direction="row" spacing={2} alignItems="stretch">
           <Grid item sm={12} md={6}>
-            <FormComp  selectedTab={selectedTab}/>
+            <FormComp  selectedTab={selectedTab} />
           </Grid>
 
           <Grid item sm={12} md={6} >

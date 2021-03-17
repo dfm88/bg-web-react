@@ -23,7 +23,6 @@ function CronologyAccordion() {
 
 
     const classes = useStyles();
-    console.log(classes.root)
 
     return (
         <Accordion className={classes.root}>
