@@ -7,6 +7,8 @@ import MyTextField from './FormsCompPersonalized/MyTextField'
 import MySelectField from './FormsCompPersonalized/MySelectField';
 import MyDateTimeField from './FormsCompPersonalized/MyDateTimeField';
 import MySubmitButton from './FormsCompPersonalized/MySubmitButton';
+import { useDispatch, useSelector } from 'react-redux'
+import { update, updateErrors } from './../../redux/mainFormSlice'
 
 
 const today = new Date();
@@ -94,7 +96,7 @@ const mainFormErrors = (errors) => {
 
 function FormComp(props) {
 
-
+    const dispatch = useDispatch();
 
     const classes = useStyles();
 
@@ -115,6 +117,8 @@ function FormComp(props) {
                     {({ values, errors }) => {
 
                         mainFormErrors(errors)
+
+                        dispatch(updateErrors(errors))
 
                         return (<>
                             <Form className={classes.root}>

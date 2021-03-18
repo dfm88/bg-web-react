@@ -6,6 +6,9 @@ import * as Yup from 'yup';
 import MySubmitButton from './FormsCompPersonalized/MySubmitButton';
 import MyTextFieldComp from './FormsCompPersonalized/MyTextField';
 import MySelectField from './FormsCompPersonalized/MySelectField';
+import { useDispatch, useSelector } from 'react-redux'
+import { update } from './../../redux/mainFormSlice'
+
 
 
 const INITIAL_VALUES = {
@@ -34,16 +37,11 @@ const MyRadio = ({ label, ...props }) => {
     )
 }
 
-
-
-
-
-
-
-
 function FaunaForm() {
 
+    const { mainFormErrors } = useSelector((state) => state.errors)
 
+    console.log('Da FaunaForm Errori di Main', mainFormErrors)
 
     return (
         <Card style={{ backgroundColor: '#DAE0E7' }} raised>
